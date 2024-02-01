@@ -66,7 +66,7 @@ class home_fragment : Fragment() {
         bundal.putString("room",itemview.room?:"room")
         bundal.putString("no",itemview.no?:"no")
 
-        val nextfragment = setting_fragment()
+        val nextfragment = detail_fragment()
         nextfragment.arguments = bundal
 
 
