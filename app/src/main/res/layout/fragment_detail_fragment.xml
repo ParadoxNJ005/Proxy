@@ -107,6 +107,45 @@
                 android:layout_marginTop="15px"
                 android:layout_marginStart="290dp"
                 android:text="Room no"/>
+
+            <TextView
+                android:id="@+id/select_date"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="20dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:textSize="20dp"
+                android:text="1/02/2024" />
+
+            <TextView
+                android:id="@+id/select_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="150dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:text="Aashrey mahagan" />
+
+            <TextView
+                android:id="@+id/select_color"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="350dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp" />
+
         </androidx.cardview.widget.CardView>
 
 

@@ -3,12 +3,181 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".setting_fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="350px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="setting fragment" />
+        android:layout_height="400dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter your Name" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/request_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/corner"
+                    android:drawablePadding="8dp"
+                    android:textSize="20dp"
+                    android:hint="NAME"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter your Roll no." />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/request_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/corner"
+                    android:drawablePadding="8dp"
+                    android:textSize="20dp"
+                    android:hint="ROLL NO"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Class" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/request_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/corner"
+                    android:drawablePadding="8dp"
+                    android:hint="Class"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="date" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/request_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/corner"
+                    android:drawablePadding="8dp"
+                    android:hint="1/02/2024"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/corner"
+                android:text="Request Proxy"
+                android:textColor="@color/red" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/insta"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/corner"
+        android:src="@drawable/pp"/>
+
+    <ImageButton
+        android:id="@+id/gmail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/corner"
+        android:layout_marginTop="590dp"
+        android:layout_marginStart="160dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/qq"/>
+
+    <ImageButton
+        android:id="@+id/git"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="590dp"
+        android:background="@drawable/corner"
+        android:layout_marginStart="290dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/rr"/>
+
+
+
 
 </FrameLayout>
