@@ -1,4 +1,4 @@
-package com.example.proxy
+package Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,7 +12,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.firebase.auth.FirebaseAuth
+import com.example.proxy.R
+import DataClass.user_req
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RequestAdapter(

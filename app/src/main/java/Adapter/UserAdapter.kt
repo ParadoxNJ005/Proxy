@@ -1,5 +1,6 @@
-package com.example.proxy
+package Adapter
 
+import Fragment.home_fragment
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.proxy.R
+import DataClass.users
 
 class UserAdapter(
     private val user: MutableList<users>,
     private val context: Context,
-    private val itemClickListener: com.example.proxy.home_fragment
+    private val itemClickListener: home_fragment
 ): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(com.example.proxy.R.layout.user_item_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.user_item_view, parent, false)
         return ViewHolder(view)
     }
 

@@ -1,9 +1,12 @@
-package com.example.proxy
+package Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.proxy.R
+import Fragment.chat_fragment
+import Fragment.home_fragment
+import Fragment.setting_fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

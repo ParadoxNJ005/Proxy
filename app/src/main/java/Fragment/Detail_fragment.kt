@@ -1,4 +1,4 @@
-package com.example.proxy
+package Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

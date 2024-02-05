@@ -1,4 +1,4 @@
-package com.example.proxy
+package DataClass
 
 data class users(
     val name: String,

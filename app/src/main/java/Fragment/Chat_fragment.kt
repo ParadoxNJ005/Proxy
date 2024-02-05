@@ -1,15 +1,16 @@
-package com.example.proxy
+package Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proxy.R
+import Adapter.RequestAdapter
+import DataClass.user_req
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -58,40 +59,9 @@ class chat_fragment : Fragment() {
         }
     }
 
-//    private fun update(){
-//        val db = FirebaseFirestore.getInstance()
-//        val batch = db.batch()
-//
-//        val docRef1 = db.collection("request").document(getCurrentUserId())
-//    }
-
     fun getCurrentUserId(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
         return currentUser?.uid ?:""
     }
 
 }
-
-
-//val batch = db.batch()
-//
-//Update operation 1
-//val docRef1 = db.collection("collection1").document("document1")
-//batch.update(docRef1, "field1", "newValue1")
-//
-//Update operation 2
-//val docRef2 = db.collection("collection2").document("document2")
-//batch.update(docRef2, "field2", "newValue2")
-//
-//Commit the batch
-//batch.commit()
-//.addOnSuccessListener {
-//     Batched writes successful
-//}
-//.addOnFailureListener { e ->
-//     Handle error
-//}
-
-
-
-//}
