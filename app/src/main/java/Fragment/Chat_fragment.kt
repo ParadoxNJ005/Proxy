@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proxy.R
 import Adapter.RequestAdapter
 import DataClass.user_req
+import android.view.WindowManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -24,7 +25,10 @@ class chat_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_chat_fragment, container, false)
+
+
 
         recyclerView = view.findViewById(R.id.request_rv)
         usrs = mutableListOf()

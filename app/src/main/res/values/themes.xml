@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.Proxy" parent="Base.Theme.Proxy" />
+
+    <style name="AppBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!--        <item name="itemBackground">@color/sustem</item>-->
+        <item name="android:background">#1A808080</item>
+        <!--        <item name="android:textColor">@color/red</item>-->
+        <item name="itemHorizontalTranslationEnabled">false</item>
+    </style>
+
 </resources>

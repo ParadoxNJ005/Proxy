@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.example.proxy.R
 import com.example.proxy.databinding.ActivitySigninBinding
@@ -15,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 class signin : AppCompatActivity() {
 
 
-    private lateinit var signupbtn: Button
+    private lateinit var signupbtn: TextView
     private lateinit var etpass: EditText
     private lateinit var etemail: EditText
     private lateinit var btnLogin: Button

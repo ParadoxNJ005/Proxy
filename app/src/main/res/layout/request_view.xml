@@ -103,26 +103,16 @@
                android:textSize="20dp"
                android:textStyle="bold"
                android:layout_marginTop="180dp"
-               android:layout_marginStart="92dp"/>
-
-           <TextView
-               android:layout_width="100dp"
-               android:layout_height="30dp"
-               android:layout_marginTop="190dp"
-               android:text="Enter Name:"
-               android:gravity="center"
-               android:textStyle="bold"
-               android:textSize="15dp"
-               android:layout_marginStart="2dp"/>
+               android:layout_marginStart="10dp"/>
 
             <Button
                 android:id="@+id/save"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
                 android:background="@drawable/corner"
-                android:layout_marginStart="300dp"
+                android:layout_marginStart="250dp"
                 android:text="Save"
-                android:textSize="12dp"
+                android:textSize="15dp"
                 android:layout_marginTop="180dp"/>
 
    </androidx.cardview.widget.CardView>

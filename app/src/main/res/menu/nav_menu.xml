@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Home"  />
+        android:title="LeaderBoard"
+        android:icon="@drawable/first_nav"/>
     <item
         android:id="@+id/message"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Message" />
+        android:title="Requests"
+        android:icon="@drawable/second_nav"/>
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Setting" />
+        android:title="Apply"
+        android:icon="@drawable/third_nav"/>
 </menu>
