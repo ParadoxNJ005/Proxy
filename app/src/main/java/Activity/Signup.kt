@@ -26,12 +26,12 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import java.io.IOException
+import kotlin.properties.Delegates
 
 class signup : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
     private lateinit var progressBar: ProgressBar
-
     private lateinit var etEmail: EditText
     private lateinit var etConfPass: EditText
     private lateinit var etPass: EditText
@@ -64,56 +64,45 @@ class signup : AppCompatActivity() {
         storageRef = Firebase.storage.reference
 
         btnSignUp.setOnClickListener {
-            showProgressBar()
-            signUpUser()
+            startActivity(Intent(this, signin::class.java))
+            finish()
         }
 
-        signinbtn.setOnClickListener{
+        signinbtn.setOnClickListener {
             startActivity(Intent(this, signin::class.java))
             finish()
         }
 
         // Select and upload image
+
+
         binding.select.setOnClickListener {
             select()
         }
+
         binding.upload.setOnClickListener {
-            showProgressBar()
-            Toast.makeText(this, "please Wait : For 5 Minutes (while your account is being created)", Toast.LENGTH_SHORT).show()
-            upload()
-        }
-    }
+            if (etEmail.text.toString().isEmpty() || etPass.text.toString().isEmpty() ||
+                etConfPass.text.toString().isEmpty() || etName.text.toString()
+                    .isEmpty() || rollNo.text.toString().isEmpty()
+            ) {
 
-    private fun signUpUser() {
-        val email = etEmail.text.toString()
-        val pass = etPass.text.toString()
-        val confirmPassword = etConfPass.text.toString()
-        val name = etName.text.toString()
-        val rollNo = rollNo.text.toString()
-        val image: String? = null
+                Toast.makeText(
+                    this,
+                    "Upload Image after filling all other entries",
+                    Toast.LENGTH_SHORT
+                ).show()
 
-        if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
-            Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (pass != confirmPassword) {
-            Toast.makeText(this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
-            hideProgressBar()
-            if (task.isSuccessful) {
-                val firebaseUser: FirebaseUser = task.result?.user!!
-                val registeredEmail = firebaseUser.email!!
-
-                // Update the user object with the imageUrl
-                val user = User(firebaseUser.uid, name, image, rollNo)
-
-                // Call registerUser with the updated user object
-                registerUser(this, user)
             } else {
-                Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show()
+
+                    showProgressBar()
+                    Toast.makeText(
+                        this,
+                        "please Wait : While your account is being created",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    upload()
+
+
             }
         }
     }
@@ -123,6 +112,7 @@ class signup : AppCompatActivity() {
             .document(getCurrentUserId())
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
+                hideProgressBar()
                 Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
@@ -150,7 +140,7 @@ class signup : AppCompatActivity() {
 
             ref.putFile(filePath!!)
                 .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
-                    hideProgressBar()
+
                     Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
 
                     ref.downloadUrl.addOnCompleteListener { uriTask ->
@@ -167,6 +157,7 @@ class signup : AppCompatActivity() {
                             val rollNo = rollNo.text.toString()
 
                             if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
+
                                 Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
                                 return@addOnCompleteListener
                             }
@@ -186,18 +177,22 @@ class signup : AppCompatActivity() {
                                     // Call registerUser with the updated user object
                                     registerUser(this, user)
                                 } else {
+                                    hideProgressBar()
                                     Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         } else {
+                            hideProgressBar()
                             Toast.makeText(this, "Failed to get download URL", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
                 .addOnFailureListener { e ->
+                    hideProgressBar()
                     Toast.makeText(this, "Image Upload Failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         } else {
+            hideProgressBar()
             Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
         }
     }
@@ -221,5 +216,11 @@ class signup : AppCompatActivity() {
 
     private fun hideProgressBar() {
         progressBar.visibility = android.view.View.GONE
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,signin::class.java))
+        finish()
     }
 }

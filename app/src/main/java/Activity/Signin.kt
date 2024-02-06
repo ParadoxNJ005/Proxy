@@ -47,8 +47,13 @@ class signin : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         btnLogin.setOnClickListener {
-            showProgressBar()
-            login()
+
+            if(etemail.text.isEmpty() || etpass.text.isEmpty()) {
+                Toast.makeText(this, "Please Fill all the fields", Toast.LENGTH_SHORT).show()
+            }else {
+                showProgressBar()
+                login()
+            }
         }
 
         signupbtn.setOnClickListener {
@@ -80,5 +85,10 @@ class signin : AppCompatActivity() {
 
     private fun hideProgressBar() {
         progressBar.visibility = android.view.View.GONE
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

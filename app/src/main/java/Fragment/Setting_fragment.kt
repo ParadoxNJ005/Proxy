@@ -111,24 +111,31 @@ class setting_fragment : Fragment() {
     }
 
     private fun fetchFromFirestore(userUid: String) {
-        FirebaseFirestore.getInstance().collection("details").document(userUid).get().addOnSuccessListener { documents ->
+        if (isAdded) { // Check if the fragment is added to an activity
+            FirebaseFirestore.getInstance().collection("details").document(userUid)
+                .get()
+                .addOnSuccessListener { documents ->
 
-            hideProgressBar()
 
-            binding.requestName.text = documents.getString("name") ?: ""
-            img = documents.getString("image") ?: ""
-            binding.requestNo.text = documents.getString("no") ?: ""
+                    binding.requestName.text = documents.getString("name") ?: ""
+                    img = documents.getString("image") ?: ""
+                    binding.requestNo.text = documents.getString("no") ?: ""
 
-            Glide.with(requireContext())
-                .load(img)
-                .thumbnail(0.1f)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.boy) // Replace with the appropriate placeholder drawable resource
-                .into(binding.img)
-        }.addOnFailureListener{
-            Toast.makeText(requireContext(), "failed to fetch", Toast.LENGTH_SHORT).show()
+                    Glide.with(requireContext())
+                        .load(img)
+                        .thumbnail(0.1f)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.boy) // Replace with the appropriate placeholder drawable resource
+                        .into(binding.img)
+
+                    hideProgressBar()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "failed to fetch", Toast.LENGTH_SHORT).show()
+                }
         }
     }
+
 
     private fun showDatePicker() {
         // Show date picker

@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proxy.R
 import Adapter.UserAdapter
 import DataClass.users
+import android.widget.ProgressBar
 import com.google.firebase.firestore.FirebaseFirestore
 
 class home_fragment : Fragment() {
 
     private lateinit var usrs: MutableList<users>
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
     private lateinit var adapter: UserAdapter // Assuming you have an adapter for your RecyclerView
 
 
@@ -26,13 +28,16 @@ class home_fragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home_fragment, container, false)
 
+
         recyclerView = view.findViewById(R.id.rv) // Replace with your RecyclerView id
         usrs = mutableListOf()
         adapter = UserAdapter(usrs, requireContext(),this) // Replace with your adapter initialization
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+        progressBar = view.findViewById(R.id.progressBar)
 
+        showProgressBar()
 
 
         fetchFromFirestore()
@@ -44,6 +49,9 @@ class home_fragment : Fragment() {
         usrs.clear()
         val db = FirebaseFirestore.getInstance()
         db.collection("users").get().addOnSuccessListener { documents ->
+
+            hideProgressBar()
+
             for (document in documents) {
                 val name = document.getString("name") ?: ""
                 val image = document.getString("image") ?: ""
@@ -76,6 +84,14 @@ class home_fragment : Fragment() {
         transaction.replace(R.id.container,nextfragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun showProgressBar() {
+        progressBar.visibility = android.view.View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = android.view.View.GONE
     }
 
 }

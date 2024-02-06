@@ -58,4 +58,9 @@ class splash : AppCompatActivity() {
         startActivity(Intent(this, signin::class.java))
         finish()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

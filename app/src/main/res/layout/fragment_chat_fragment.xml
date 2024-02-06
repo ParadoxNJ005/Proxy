@@ -3,13 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="Fragment.chat_fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/blue"
         android:layout_height="60dp">
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
@@ -34,6 +43,7 @@
         android:id="@+id/request_rv"
         android:layout_marginTop="80dp"
         android:layout_width="match_parent"
+        android:background="@drawable/fade1"
         android:layout_height="match_parent"
         tools:listitem="@layout/request_view"/>
 

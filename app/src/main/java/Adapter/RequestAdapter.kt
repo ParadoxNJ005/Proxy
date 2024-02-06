@@ -50,7 +50,7 @@ class RequestAdapter(
         }
 
         holder.save.setOnClickListener {
-            val assignmentText = holder.asign.text.toString()
+            val assignmentText =holder.asign.text.toString()
             if (assignmentText.isNotEmpty()) {
                 updateUserData(currentItem, assignmentText)
             } else {

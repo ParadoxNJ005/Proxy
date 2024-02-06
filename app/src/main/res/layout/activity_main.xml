@@ -22,7 +22,7 @@
         style="@style/AppBottomNavigationView"
         android:layout_alignParentBottom="true"
         android:scrollIndicators="left"
-        app:itemIconTint="@color/orange"
+        app:itemIconTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

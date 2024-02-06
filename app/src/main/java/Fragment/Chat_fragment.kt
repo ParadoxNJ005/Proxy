@@ -1,5 +1,6 @@
 package Fragment
 
+import Activity.signin
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proxy.R
 import Adapter.RequestAdapter
 import DataClass.user_req
+import android.content.Intent
 import android.view.WindowManager
+import android.widget.ProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -20,6 +23,7 @@ class chat_fragment : Fragment() {
     private lateinit var usrs: MutableList<user_req>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RequestAdapter
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +38,10 @@ class chat_fragment : Fragment() {
         usrs = mutableListOf()
         adapter = RequestAdapter(usrs, requireContext())
 
+        progressBar = view.findViewById(R.id.progressBar)
+
+        showProgressBar()
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter // Attach the adapter to the RecyclerView
 
@@ -46,6 +54,9 @@ class chat_fragment : Fragment() {
     private fun fetchFromFirestore() {
         usrs.clear()
         FirebaseFirestore.getInstance().collection("request").get().addOnSuccessListener { documents->
+
+            hideProgressBar()
+
             for(document in documents){
                 val docId = document.id
                 val name = document.getString("name")?:""
@@ -67,5 +78,14 @@ class chat_fragment : Fragment() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         return currentUser?.uid ?:""
     }
+
+    private fun showProgressBar() {
+        progressBar.visibility = android.view.View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = android.view.View.GONE
+    }
+
 
 }
