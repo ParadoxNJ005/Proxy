@@ -7,5 +7,6 @@ data class user_req(
     val date:String,
     val image:String,
     var asign:String,
-    var docId:String
+    var docId:String,
+    var status:String,
 )

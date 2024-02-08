@@ -1,5 +1,6 @@
 package Adapter
 
+import DataClass.user_req
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.proxy.R
-import DataClass.user_req
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import java.util.Calendar.DAY_OF_MONTH
 
 class RequestAdapter(
     private val user: MutableList<user_req>,
     private val context: Context
 ) : RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,55 +38,72 @@ class RequestAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = user[position]
 
-        holder.name.text = user[position].name
-        holder.clss.text = user[position].clss
-        holder.no.text = user[position].no
-        holder.date.text = user[position].date
+        val currentDate = Calendar.getInstance().get(DAY_OF_MONTH)
 
-        Glide.with(context)
-            .load(user[position].image)
-            .thumbnail(0.1f)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(holder.image)
+//        if( currentItem.date.get(DAY_OF_MONTH) > currentDate) {
 
-        if (currentItem.asign != null) {
-            holder.asign.setText(currentItem.asign)
-        }
+            holder.name.text = currentItem.name
+            holder.clss.text = currentItem.clss
+            holder.no.text = currentItem.no
+            holder.date.text = currentItem.date
 
-        holder.save.setOnClickListener {
-            val assignmentText =holder.asign.text.toString()
-            if (assignmentText.isNotEmpty()) {
-                updateUserData(currentItem, assignmentText)
-            } else {
-                Toast.makeText(context, "Assignment text cannot be empty", Toast.LENGTH_SHORT).show()
+            Glide.with(context)
+                .load(currentItem.image)
+                .thumbnail(0.1f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.image)
+
+            holder.save.setOnClickListener {
+                val assignmentText = holder.asign.text.toString()
+                val statusText = holder.status.text.toString()
+
+                if (statusText.isNotEmpty()) {
+                    updateUserStatus(currentItem, statusText)
+                } else {
+                    Toast.makeText(context, "Status can't be Empty", Toast.LENGTH_SHORT).show()
+                }
+
+                if (assignmentText.isNotEmpty()) {
+                    updateUserData(currentItem, assignmentText)
+                } else {
+                    Toast.makeText(context, "Assignment text cannot be Empty", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
-        }
+//        }else{
+//        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name = itemView.findViewById<TextView>(R.id.name)
-        val clss = itemView.findViewById<TextView>(R.id.clss)
-        val no = itemView.findViewById<TextView>(R.id.no)
-        val date = itemView.findViewById<TextView>(R.id.date)
-        val image = itemView.findViewById<ImageView>(R.id.profile_img)
-        var asign = itemView.findViewById<EditText>(R.id.asign)
-        val save = itemView.findViewById<Button>(R.id.save)
+        val name: TextView = itemView.findViewById(R.id.name)
+        val clss: TextView = itemView.findViewById(R.id.clss)
+        val no: TextView = itemView.findViewById(R.id.no)
+        val date: TextView = itemView.findViewById(R.id.date)
+        val image: ImageView = itemView.findViewById(R.id.profile_img)
+        val asign: EditText = itemView.findViewById(R.id.asign)
+        val save: Button = itemView.findViewById(R.id.save)
+        val status: EditText = itemView.findViewById(R.id.status)
     }
 
     private fun updateUserData(currentItem: user_req, assignmentText: String) {
         val firestore = FirebaseFirestore.getInstance()
-
         firestore.collection("request").document(currentItem.docId).update("asign", assignmentText)
             .addOnSuccessListener {
-                // Update successful
                 Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
-                // Error updating data
-                Toast.makeText(context, e.localizedMessage , Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
             }
     }
 
-
+    private fun updateUserStatus(currentItem: user_req, statusText: String) {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.collection("request").document(currentItem.docId).update("status", statusText)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
+    }
 }
-

@@ -31,6 +31,7 @@ class About_Fragment : Fragment() {
             EnterAdmin()
         }
 
+
         return binding.root
     }
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    android:background="@color/blue"
     tools:context="Fragment.detail_fragment"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/fade1"
         android:layout_height="match_parent">
 
         <ImageView
@@ -57,10 +58,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
-            app:layout_constraintHorizontal_bias="0.851"
+            app:layout_constraintHorizontal_bias="0.861"
             app:layout_constraintStart_toStartOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.844" />
+            app:layout_constraintVertical_bias="0.797" />
 
         <TextView
             android:id="@+id/name"
@@ -72,83 +73,87 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
-            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintHorizontal_bias="0.075"
             app:layout_constraintStart_toStartOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.844" />
+            app:layout_constraintVertical_bias="0.797" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="800dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="10dp"
-            app:cardBackgroundColor="@color/cardview_dark_background"
+            android:layout_height="300dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/grey"
+            app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" >
+            app:layout_constraintTop_toBottomOf="@+id/imageView6">
 
             <TextView
                 android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:layout_marginStart="20dp"
+                android:text="Roll no"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="30dp"
-                android:layout_margin="15px"
-                android:text="Roll no"/>
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="20px"
+                android:text="Room no"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="25dp"
-                android:layout_marginTop="15px"
-                android:layout_marginStart="290dp"
-                android:text="Room no"/>
+                android:textSize="25dp" />
 
-            <TextView
-                android:id="@+id/select_date"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginStart="20dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"
-                android:textSize="20dp"
-                android:text="1/02/2024" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/select_date"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:layout_marginTop="70dp"-->
+            <!--                android:layout_marginStart="20dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:gravity="center"-->
+            <!--                android:paddingEnd="5dp"-->
+            <!--                android:paddingStart="5dp"-->
+            <!--                android:textSize="20dp"-->
+            <!--                android:text="1/02/2024" />-->
 
-            <TextView
-                android:id="@+id/select_name"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginStart="150dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"
-                android:text="Aashrey mahagan" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/select_name"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:layout_marginTop="70dp"-->
+            <!--                android:layout_marginStart="150dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:gravity="center"-->
+            <!--                android:textSize="20dp"-->
+            <!--                android:paddingEnd="5dp"-->
+            <!--                android:paddingStart="5dp"-->
+            <!--                android:text="Aashrey mahagan" />-->
 
-            <TextView
-                android:id="@+id/select_color"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginStart="350dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/select_color"-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:layout_marginTop="70dp"-->
+            <!--                android:layout_marginStart="350dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:gravity="center"-->
+            <!--                android:textSize="20dp"-->
+            <!--                android:paddingEnd="5dp"-->
+            <!--                android:paddingStart="5dp" />-->
 
         </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

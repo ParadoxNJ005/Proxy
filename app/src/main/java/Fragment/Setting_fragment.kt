@@ -192,4 +192,7 @@ class setting_fragment : Fragment() {
         progressBar.visibility = android.view.View.GONE
     }
 
+
+
+
 }

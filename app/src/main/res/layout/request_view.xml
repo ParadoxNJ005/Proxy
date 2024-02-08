@@ -29,13 +29,30 @@
                 android:id="@+id/profile_img"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
+                android:layout_marginStart="4dp"
                 android:src="@drawable/ic_launcher_background"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
-                android:layout_marginStart="5px"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/status"
+                android:layout_width="88dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/corner"
+                android:gravity="center"
+                android:hint="Status"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_img"
+                app:layout_constraintVertical_bias="0.437" />
 
             <TextView
                 android:id="@+id/no"

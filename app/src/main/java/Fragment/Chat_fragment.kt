@@ -47,6 +47,7 @@ class chat_fragment : Fragment() {
 
         fetchFromFirestore()
 
+
         return view
     }
 
@@ -65,8 +66,9 @@ class chat_fragment : Fragment() {
                 val clss = document.getString("clss")?:""
                 val no = document.getString("no")?:""
                 val asign = document.getString("asign")?:""
+                val status = document.getString("status")?:""
 
-                usrs.add(user_req(name, clss,no,date,image,asign,docId))
+                usrs.add(user_req(name, clss,no,date,image,asign,docId,status))
             }
            adapter.notifyDataSetChanged()
         }.addOnFailureListener{

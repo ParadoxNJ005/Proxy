@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.proxy.R
 import DataClass.User
+import DataClass.Users
 import com.example.proxy.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -36,6 +37,7 @@ class signup : AppCompatActivity() {
     private lateinit var etConfPass: EditText
     private lateinit var etPass: EditText
     private lateinit var etName: EditText
+    private lateinit var roomno: EditText
     private lateinit var btnSignUp: Button
     private lateinit var signinbtn: TextView
     private lateinit var rollNo: EditText
@@ -59,6 +61,7 @@ class signup : AppCompatActivity() {
         rollNo = findViewById(R.id.rollno)
         signinbtn = findViewById(R.id.SignIn)
         progressBar = findViewById(R.id.progressBar)
+        roomno = findViewById(R.id.roomno)
 
         auth = Firebase.auth
         storageRef = Firebase.storage.reference
@@ -108,12 +111,29 @@ class signup : AppCompatActivity() {
     }
 
     private fun registerUser(activity: signup, userInfo: User) {
+
         mFireStore.collection("details")
             .document(getCurrentUserId())
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
-                hideProgressBar()
+
                 Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e("registerUser", "Error registering user", e)
+                Toast.makeText(activity, "Error registering user: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+    private fun updateProfile(activity: signup, userInfo: Users){
+
+        mFireStore.collection("users")
+            .document(getCurrentUserId())
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                hideProgressBar()
+                Toast.makeText(this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Log.e("registerUser", "Error registering user", e)
@@ -155,6 +175,8 @@ class signup : AppCompatActivity() {
                             val confirmPassword = etConfPass.text.toString()
                             val name = etName.text.toString()
                             val rollNo = rollNo.text.toString()
+                            val room = roomno.text.toString()
+                            val points = "50"
 
                             if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
 
@@ -174,8 +196,13 @@ class signup : AppCompatActivity() {
                                     // Update the user object with the imageUrl
                                     val user = User(firebaseUser.uid, name, imageUrl, rollNo)
 
+                                    //Update the Users object with the data
+                                    val users = Users(name,imageUrl,points,room,rollNo,firebaseUser.uid)
+
                                     // Call registerUser with the updated user object
                                     registerUser(this, user)
+                                    updateProfile(this,users)
+
                                 } else {
                                     hideProgressBar()
                                     Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show()

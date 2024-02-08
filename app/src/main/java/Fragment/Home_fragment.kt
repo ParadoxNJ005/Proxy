@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proxy.R
 import Adapter.UserAdapter
-import DataClass.users
+import DataClass.Users
 import android.widget.ProgressBar
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class home_fragment : Fragment() {
 
-    private lateinit var usrs: MutableList<users>
+    private lateinit var usrs: MutableList<Users>
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var adapter: UserAdapter // Assuming you have an adapter for your RecyclerView
@@ -48,7 +49,7 @@ class home_fragment : Fragment() {
     private fun fetchFromFirestore() {
         usrs.clear()
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").get().addOnSuccessListener { documents ->
+        db.collection("users").orderBy("points").get().addOnSuccessListener { documents ->
 
             hideProgressBar()
 
@@ -58,16 +59,17 @@ class home_fragment : Fragment() {
                 val points = document.getString("points") ?:""
                 val room = document.getString("room") ?: ""
                 val no = document.getString("no") ?: ""
+                val id = document.getString("id")?:""
 
 
-                usrs.add(users(name, image, points,room,no))
+                usrs.add(Users(name, image, points,room,no,id))
             }
 
             adapter.notifyDataSetChanged() // Notify the adapter that the data has changed
         }
     }
 
-    fun onItemClick(itemview: users){
+    fun onItemClick(itemview: Users){
 
         val bundal = Bundle()
         bundal.putString("name",itemview.name?:"name")
@@ -75,6 +77,7 @@ class home_fragment : Fragment() {
         bundal.putString("points", itemview.points?:"points")
         bundal.putString("room",itemview.room?:"room")
         bundal.putString("no",itemview.no?:"no")
+        bundal.putString("id",itemview.id?:"id")
 
         val nextfragment = detail_fragment()
         nextfragment.arguments = bundal
@@ -95,3 +98,4 @@ class home_fragment : Fragment() {
     }
 
 }
+

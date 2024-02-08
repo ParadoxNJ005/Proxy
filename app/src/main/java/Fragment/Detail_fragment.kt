@@ -29,6 +29,9 @@ class detail_fragment : Fragment() {
         val room = arguments?.getString("room")
         val no = arguments?.getString("no")
 
+        //document id of the user
+        val docId = arguments?.getString("id")
+
         binding.name.text = name
         binding.points.text = points
         binding.room.text = room
