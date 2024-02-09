@@ -1,8 +1,10 @@
 package Adapter
 
+import Activity.chatting_Activity
 import DataClass.Users
 import Fragment.home_fragment
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.proxy.R
+import com.google.firebase.auth.FirebaseAuth
 
 class UserAdapter(
 
@@ -44,7 +47,13 @@ class UserAdapter(
             holder.rank.text = ranking.toString()
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(user[position])
+            val intent = Intent(context,chatting_Activity::class.java)
+
+            intent.putExtra("name",user[position].name)
+            intent.putExtra("uid",user[position].id)
+            intent.putExtra("image",user[position].image)
+
+            context.startActivity(intent)
         }
     }
 

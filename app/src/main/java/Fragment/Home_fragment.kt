@@ -9,18 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proxy.R
 import Adapter.UserAdapter
+import Adapter.statusAdapter
 import DataClass.Users
+import DataClass.status
 import android.widget.ProgressBar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class home_fragment : Fragment() {
 
     private lateinit var usrs: MutableList<Users>
+    private lateinit var statusUsrs: MutableList<status>
     private lateinit var recyclerView: RecyclerView
+    private lateinit var StatusRV: RecyclerView
     private lateinit var progressBar: ProgressBar
-    private lateinit var adapter: UserAdapter // Assuming you have an adapter for your RecyclerView
-
+    private lateinit var adapter: UserAdapter
+    private lateinit var StatusAdptr : statusAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +35,20 @@ class home_fragment : Fragment() {
 
 
         recyclerView = view.findViewById(R.id.rv) // Replace with your RecyclerView id
+        StatusRV = view.findViewById(R.id.statusRV)
+
         usrs = mutableListOf()
-        adapter = UserAdapter(usrs, requireContext(),this) // Replace with your adapter initialization
+        adapter = UserAdapter(usrs, requireContext(),this)        // Replace with your adapter initialization
+
+        statusUsrs = mutableListOf()
+        StatusAdptr = statusAdapter(requireContext(), statusUsrs)     // Replace with your adapter initialization
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+
+        StatusRV.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,true)
+        StatusRV.adapter = StatusAdptr
+
         progressBar = view.findViewById(R.id.progressBar)
 
         showProgressBar()
@@ -48,6 +61,8 @@ class home_fragment : Fragment() {
 
     private fun fetchFromFirestore() {
         usrs.clear()
+        statusUsrs.clear()
+
         val db = FirebaseFirestore.getInstance()
         db.collection("users").orderBy("points").get().addOnSuccessListener { documents ->
 
@@ -61,10 +76,15 @@ class home_fragment : Fragment() {
                 val no = document.getString("no") ?: ""
                 val id = document.getString("id")?:""
 
+                if(id != FirebaseAuth.getInstance().currentUser?.uid) {
 
-                usrs.add(Users(name, image, points,room,no,id))
+                    usrs.add(Users(name, image, points, room, no, id))
+
+                }
+                statusUsrs.add(status(name,image))
             }
 
+            StatusAdptr.notifyDataSetChanged()
             adapter.notifyDataSetChanged() // Notify the adapter that the data has changed
         }
     }
@@ -98,4 +118,6 @@ class home_fragment : Fragment() {
     }
 
 }
+
+
 

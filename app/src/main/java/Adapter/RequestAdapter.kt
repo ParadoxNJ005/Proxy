@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -38,7 +39,7 @@ class RequestAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = user[position]
 
-        val currentDate = Calendar.getInstance().get(DAY_OF_MONTH)
+//        val currentDate = Calendar.getInstance().get(DAY_OF_MONTH)
 
 //        if( currentItem.date.get(DAY_OF_MONTH) > currentDate) {
 
@@ -52,6 +53,19 @@ class RequestAdapter(
                 .thumbnail(0.1f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image)
+
+            if (currentItem.asign != null) {
+                holder.asign.setText(currentItem.asign)
+            }
+            if (currentItem.status != null) {
+                holder.status.setText(currentItem.status)
+
+            }
+
+        if(holder.status.text.toString() == "success"){
+            Toast.makeText(context, "hi ${holder.status.text}", Toast.LENGTH_SHORT).show()
+            holder.asign.setBackgroundColor(ContextCompat.getColor(context, R.color.parrot))
+        }
 
             holder.save.setOnClickListener {
                 val assignmentText = holder.asign.text.toString()

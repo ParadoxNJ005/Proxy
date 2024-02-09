@@ -111,30 +111,32 @@ class setting_fragment : Fragment() {
     }
 
     private fun fetchFromFirestore(userUid: String) {
-        if (isAdded) { // Check if the fragment is added to an activity
+        if (isAdded && context != null) { // Check if the fragment is added to an activity and has a non-null context
             FirebaseFirestore.getInstance().collection("details").document(userUid)
                 .get()
                 .addOnSuccessListener { documents ->
+                    context?.let { ctx ->
+                        binding.requestName.text = documents.getString("name") ?: ""
+                        img = documents.getString("image") ?: ""
+                        binding.requestNo.text = documents.getString("no") ?: ""
 
+                        Glide.with(ctx)
+                            .load(img)
+                            .thumbnail(0.1f)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .placeholder(R.drawable.boy) // Replace with the appropriate placeholder drawable resource
+                            .into(binding.img)
 
-                    binding.requestName.text = documents.getString("name") ?: ""
-                    img = documents.getString("image") ?: ""
-                    binding.requestNo.text = documents.getString("no") ?: ""
-
-                    Glide.with(requireContext())
-                        .load(img)
-                        .thumbnail(0.1f)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.boy) // Replace with the appropriate placeholder drawable resource
-                        .into(binding.img)
-
-                    hideProgressBar()
+                        hideProgressBar()
+                    }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(requireContext(), "failed to fetch", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "failed to fetch", Toast.LENGTH_SHORT).show()
                 }
         }
     }
+
+
 
 
     private fun showDatePicker() {
